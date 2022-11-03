@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import css from "./ImageGallery.module.css";
 import { ThreeDots } from 'react-loader-spinner';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import Modal from 'components/Modal/Modal';
 
 
 
@@ -11,6 +12,7 @@ export default class ImageGallery extends PureComponent {
     page: 1,
     error: null,
     loading: false,
+    showModal: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,6 +35,10 @@ export default class ImageGallery extends PureComponent {
     }
   }
 
+  toggleModal = () => {
+    this.setState(prevState => ({showModal: !prevState.showModal}))
+  }
+
   handleClick = () => {
       
       this.setState({ loading: true });
@@ -51,12 +57,12 @@ export default class ImageGallery extends PureComponent {
 
   
   render() {
-    const { images, loading} = this.state;
+    const { images, loading, showModal} = this.state;
 
     return <div>
       <ul className={css.gallery}>
       {images.map(image => {
-        return < ImageGalleryItem key = {image.id} image = {image.webformatURL} tags = {image.tags} />
+        return < ImageGalleryItem onClick={this.toggleModal} key = {image.id} image = {image.webformatURL} tags = {image.tags}/>
       })}
       </ul>
 
@@ -72,6 +78,7 @@ export default class ImageGallery extends PureComponent {
         wrapperClassName=""
         visible={true} />}
       
+      {showModal && <Modal onClose={this.toggleModal}></Modal>}
     </div>
   }
 }

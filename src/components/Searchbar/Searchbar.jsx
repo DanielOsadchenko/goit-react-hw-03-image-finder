@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import css from './SearchBar.module.css';
 
 
+
 export default class SearchBar extends PureComponent {
 
   state = { inputquery: '', };
