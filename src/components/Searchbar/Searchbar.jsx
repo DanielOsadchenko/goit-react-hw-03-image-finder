@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import css from './SearchBar.module.css';
+import PropTypes from 'prop-types';
+import { FaSearch } from "react-icons/fa";
 
 
 
@@ -23,7 +25,7 @@ export default class SearchBar extends PureComponent {
       <form className={css.SearchForm} onSubmit={this.formSubmit}>
   
         <button type="submit" className={css.button}>
-          <span className={css.buttonLabel}></span>
+          <FaSearch/>
         </button>
 
         <input
@@ -39,4 +41,8 @@ export default class SearchBar extends PureComponent {
       </form>
     </header>
   }
+}
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func,
 }
