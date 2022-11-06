@@ -20,7 +20,8 @@ export default class App extends PureComponent {
   };
 
   saveSearchQuerry = (query) => {
-    this.setState({ query })
+    this.setState({ query });
+    this.setState({page: 1})
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -29,7 +30,7 @@ export default class App extends PureComponent {
     
 
     if (prevQuery !== nextQuery) {
-      this.setState({ page: 1, loading: true });
+      this.setState({loading: true });
 
       fetch(`https://pixabay.com/api/?q=${nextQuery}&page=${this.state.page}&key=30188307-c49a871897b6d5bfff07bff1b&image_type=photo&orientation=horizontal&per_page=12`)
         .then(response => {
